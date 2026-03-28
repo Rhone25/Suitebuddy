@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SuiteFinder</title>
+<style>
+:root{--bg:#08101f;--card:#101a33;--line:#223154;--text:#eef3ff;--muted:#8ea0c9;--accent:#7ef0c2;--accent2:#6ea8fe}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(180deg,#0d1730 0%,#08101f 100%);color:var(--text)}
+header,main,footer{max-width:1100px;margin:0 auto;padding:20px}header{padding-top:50px}.tag{display:inline-block;color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:12px 0 10px}p{color:var(--muted);line-height:1.6} .search{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:12px;margin:26px 0 12px}
+.box,.card,.panel{background:rgba(16,26,51,.94);border:1px solid var(--line);border-radius:18px}.box{padding:14px 16px}.box label{display:block;color:var(--muted);font-size:.82rem;margin-bottom:6px}.box input{width:100%;background:transparent;border:none;outline:none;color:var(--text);font-size:1rem}
+button{border:none;border-radius:14px;cursor:pointer;font-weight:700}.searchbtn{background:linear-gradient(135deg,var(--accent2),#8b7bff);color:#fff;padding:0 18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.card{padding:18px}.top{display:flex;justify-content:space-between;gap:10px}.city{color:var(--accent);font-size:.8rem;text-transform:uppercase;font-weight:700}.name{font-size:1.12rem;font-weight:800;margin:6px 0 8px}.meta{font-size:.95rem}.badge{padding:7px 10px;border-radius:999px;background:rgba(110,168,254,.14);color:#cfe0ff;font-size:.8rem;font-weight:700;height:fit-content}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.use{background:var(--accent);color:#062014;padding:11px 14px}.link{display:inline-block;padding:11px 14px;border-radius:12px;border:1px solid var(--line);color:var(--text);text-decoration:none}.panel{padding:18px;margin-top:24px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)}footer{color:var(--muted);padding-bottom:40px}@media(max-width:900px){.search,.grid,.steps{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<header>
+<div class="tag">Suite Certificate Search</div>
+<h1>Find Hyatt suite upgrade options by city and date.</h1>
+<p>Search hotels, compare availability, and click Use Certificate to see the best match for your stay.</p>
+<div class="search">
+<div class="box"><label>City</label><input value="Chicago"></div>
+<div class="box"><label>Check-in</label><input type="date" value="2026-04-04"></div>
+<div class="box"><label>Check-out</label><input type="date" value="2026-04-06"></div>
+<button class="searchbtn">Search Availability</button>
+</div>
+</header>
+<main>
+<div class="grid">
+<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Hyatt Regency Chicago</div></div><div class="badge">Suite likely available</div></div><div class="meta">Downtown option with strong fit for certificate searches.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
+<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Park Hyatt Chicago</div></div><div class="badge">Check Hyatt</div></div><div class="meta">Luxury option where users can inspect dates and suite inventory.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
+<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Andaz West Loop</div></div><div class="badge">No suite shown</div></div><div class="meta">Fallback result when no standard suite is visible.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
+</div>
+<section class="panel">
+<h2>How it works</h2>
+<div class="steps">
+<div class="step"><b>1. Search by city</b><br>Enter a destination and dates.</div>
+<div class="step"><b>2. Review hotels</b><br>Show Hyatt properties with availability signals.</div>
+<div class="step"><b>3. Use certificate</b><br>Route users to the best booking path.</div>
+<div class="step"><b>4. Refine results</b><br>Filter by brand, region, and suite status.</div>
+</div>
+</section>
+</main>
+<footer>Starter plain-HTML version for your Hyatt suite search tool.</footer>
+</body>
+</html>
