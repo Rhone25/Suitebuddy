@@ -44,3 +44,33 @@ button{border:none;border-radius:14px;cursor:pointer;font-weight:700}.searchbtn{
 <footer>Starter plain-HTML version for your Hyatt suite search tool.</footer>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<head><title>SuiteBuddy</title></head>
+<body>
+  <h1>Hyatt Suites by City</h1>
+  <input id="city" placeholder="Chicago" value="Chicago">
+  <button onclick="loadSuites()">Search</button>
+  <ul id="suites"></ul>
+
+  <script>
+  async function loadSuites() {
+    const city = document.getElementById('city').value;
+    // Proxy rooms.aero (hides source)
+    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent('https://rooms.aero/api/hotels?program=hyatt&city=' + city)}`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const list = document.getElementById('suites');
+      list.innerHTML = data.hotels
+        ?.filter(h => h.suites > 0)  // Suites available
+        .map(h => `<li>${h.name} - ${h.suites} suites, ${h.points} pts/night</li>`)
+        .join('') || '<li>No suites found</li>';
+    } catch(e) { alert('Try again'); }
+  }
+  loadSuites();  // Auto-load
+  </script>
+</body>
+</html>
+
