@@ -19,18 +19,14 @@ button{border:none;border-radius:14px;cursor:pointer;font-weight:700}.searchbtn{
 <h1>Find Hyatt suite upgrade options by city and date.</h1>
 <p>Search hotels, compare availability, and click Use Certificate to see the best match for your stay.</p>
 <div class="search">
-<div class="box"><label>City</label><input value="Chicago"></div>
-<div class="box"><label>Check-in</label><input type="date" value="2026-04-04"></div>
-<div class="box"><label>Check-out</label><input type="date" value="2026-04-06"></div>
-<button class="searchbtn">Search Availability</button>
+<div class="box"><label>City</label><input id="city" value="Chicago"></div>
+<div class="box"><label>Check-in</label><input id="checkin" type="date" value="2026-04-04"></div>
+<div class="box"><label>Check-out</label><input id="checkout" type="date" value="2026-04-06"></div>
+<button class="searchbtn" onclick="search()">Search Availability</button>
 </div>
 </header>
 <main>
-<div class="grid">
-<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Hyatt Regency Chicago</div></div><div class="badge">Suite likely available</div></div><div class="meta">Downtown option with strong fit for certificate searches.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
-<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Park Hyatt Chicago</div></div><div class="badge">Check Hyatt</div></div><div class="meta">Luxury option where users can inspect dates and suite inventory.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
-<div class="card"><div class="top"><div><div class="city">Chicago</div><div class="name">Andaz West Loop</div></div><div class="badge">No suite shown</div></div><div class="meta">Fallback result when no standard suite is visible.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
-</div>
+<div id="results" class="grid"></div>
 <section class="panel">
 <h2>How it works</h2>
 <div class="steps">
@@ -42,35 +38,15 @@ button{border:none;border-radius:14px;cursor:pointer;font-weight:700}.searchbtn{
 </section>
 </main>
 <footer>Starter plain-HTML version for your Hyatt suite search tool.</footer>
+<script>
+function search(){
+  const city = document.getElementById('city').value.trim() || 'Chicago';
+  document.getElementById('results').innerHTML = `
+    <div class="card"><div class="top"><div><div class="city">${city}</div><div class="name">Hyatt Regency ${city}</div></div><div class="badge">Suite likely available</div></div><div class="meta">Downtown option with strong fit for certificate searches.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
+    <div class="card"><div class="top"><div><div class="city">${city}</div><div class="name">Park Hyatt ${city}</div></div><div class="badge">Check Hyatt</div></div><div class="meta">Luxury option where users can inspect dates and suite inventory.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>
+    <div class="card"><div class="top"><div><div class="city">${city}</div><div class="name">Andaz West Loop</div></div><div class="badge">No suite shown</div></div><div class="meta">Fallback result when no standard suite is visible.</div><div class="actions"><button class="use">Use Certificate</button><a class="link" href="#">View details</a></div></div>`;
+}
+search();
+</script>
 </body>
 </html>
-
-<!DOCTYPE html>
-<html>
-<head><title>SuiteBuddy</title></head>
-<body>
-  <h1>Hyatt Suites by City</h1>
-  <input id="city" placeholder="Chicago" value="Chicago">
-  <button onclick="loadSuites()">Search</button>
-  <ul id="suites"></ul>
-
-  <script>
-  async function loadSuites() {
-    const city = document.getElementById('city').value;
-    // Proxy rooms.aero (hides source)
-    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent('https://rooms.aero/api/hotels?program=hyatt&city=' + city)}`;
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      const list = document.getElementById('suites');
-      list.innerHTML = data.hotels
-        ?.filter(h => h.suites > 0)  // Suites available
-        .map(h => `<li>${h.name} - ${h.suites} suites, ${h.points} pts/night</li>`)
-        .join('') || '<li>No suites found</li>';
-    } catch(e) { alert('Try again'); }
-  }
-  loadSuites();  // Auto-load
-  </script>
-</body>
-</html>
-
